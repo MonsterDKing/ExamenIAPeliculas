@@ -1,5 +1,6 @@
 import 'package:examenia/models/UsuarioResponseModel.dart';
 import 'package:examenia/provider/UsuarioProvider.dart';
+import 'package:examenia/ui/Forms/CardFormWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,23 @@ class ProfileView extends StatelessWidget {
                       Text("${snapshot.data.email}"),
                       Text("Tarjeta"),
                       Text("${snapshot.data.cardNumber}"),
-                      CardFormWidget(formKey: _formKey),
+                      usuarioProvider.getCardCinepolis == null
+                          ? CardFormWidget(formKey: _formKey)
+                          : Container(
+                              margin: EdgeInsets.symmetric(vertical: 30),
+                              child: Column(
+                                children: [
+                                  Text(
+                                      "Espere en lo que se solicita la informacion"),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Container(
+                                      child: Center(
+                                          child: CircularProgressIndicator()))
+                                ],
+                              ),
+                            )
                     ],
                   ),
                 )
@@ -46,61 +63,6 @@ class ProfileView extends StatelessWidget {
           }
           return Center(child: CircularProgressIndicator());
         },
-      ),
-    );
-  }
-}
-
-class CardFormWidget extends StatelessWidget {
-  const CardFormWidget({
-    Key key,
-    @required GlobalKey<FormBuilderState> formKey,
-  })  : _formKey = formKey,
-        super(key: key);
-
-  final GlobalKey<FormBuilderState> _formKey;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 30),
-      child: FormBuilder(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              child: FormBuilderTextField(
-                name: 'tarjeta',
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Ingresa Tarjeta',
-                ),
-                onChanged: (v) {},
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.required(context,
-                      errorText: "Este campo es requerido"),
-                ]),
-                keyboardType: TextInputType.number,
-              ),
-            ),
-            OutlineButton(
-              borderSide: BorderSide(width: 1, color: Colors.grey),
-              color: Colors.grey,
-              onPressed: () async {
-                _formKey.currentState.save();
-                if (_formKey.currentState.validate()) {
-                  print("es valido");
-                } else {
-                  print("no valido");
-                }
-              },
-              child: Text("Iniciar sesión"),
-            )
-          ],
-        ),
       ),
     );
   }

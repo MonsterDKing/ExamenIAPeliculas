@@ -48,6 +48,26 @@ class ApiService {
     }
   }
 
+  Future<UsuarioResponseModel> getDataCard(String bearer, String card) async {
+    try {
+      final String _url = Appconfig.userUrl;
+      headers["Authorization"] = bearer;
+      var body = json.encode({
+        "card_number": card,
+        "country_code": "MX",
+        "transaction_include": true
+      });
+      final resp = await http.post(_url, headers: headers, body: body);
+      if (resp.statusCode == 200) {
+        final decodedData = json.decode(resp.body);
+        return decodedData;
+      }
+      return null;
+    } catch (ex) {
+      return null;
+    }
+  }
+
   Future<CarteleraResponseModel> getCartelera(String bearer) async {
     try {
       final String _url = Appconfig.carteleraUrl;

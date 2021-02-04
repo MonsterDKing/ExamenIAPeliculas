@@ -80,44 +80,51 @@ class LoginView extends StatelessWidget {
   }
 
   Widget _buttonSend(UsuarioProvider loginProvider, BuildContext context) {
-    return OutlineButton(
-      borderSide: BorderSide(width: 1, color: Colors.grey),
-      color: Colors.grey,
-      onPressed: () async {
-        _formKey.currentState.save();
-        if (_formKey.currentState.validate()) {
-          var resp = await loginProvider.login(LoginModel(
-              _formKey.currentState.value["username"],
-              _formKey.currentState.value["password"]));
+    return Container(
+      height: 40,
+      margin: EdgeInsets.symmetric(vertical: 20),
+      child: OutlineButton(
+        borderSide: BorderSide(width: 1, color: Colors.grey),
+        color: Colors.grey,
+        onPressed: loginProvider.getLoading
+            ? null
+            : () async {
+                _formKey.currentState.save();
+                if (_formKey.currentState.validate()) {
+                  var resp = await loginProvider.login(LoginModel(
+                      _formKey.currentState.value["username"],
+                      _formKey.currentState.value["password"]));
 
-          if (!resp) {
-            return AwesomeDialog(
-              context: context,
-              dialogType: DialogType.ERROR,
-              animType: AnimType.BOTTOMSLIDE,
-              title: 'Error',
-              desc: 'Usuario y/o contraseña incorrecta',
-              btnOkOnPress: () {},
-            )..show();
-          }
-          return AwesomeDialog(
-            context: context,
-            dialogType: DialogType.SUCCES,
-            animType: AnimType.BOTTOMSLIDE,
-            title: 'Bienvenido',
-            desc: 'Tus datos son correctos',
-            btnOkOnPress: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => TapBarView()),
-              );
-            },
-          )..show();
-        }
-      },
-      child: loginProvider.getLoading
-          ? CircularProgressIndicator()
-          : Text("Iniciar sesión"),
+                  if (!resp) {
+                    return AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.ERROR,
+                        animType: AnimType.BOTTOMSLIDE,
+                        title: 'Error',
+                        desc: 'Usuario y/o contraseña incorrecta',
+                        btnOkOnPress: () {},
+                        btnOkColor: Colors.red)
+                      ..show();
+                  }
+                  return AwesomeDialog(
+                    context: context,
+                    dialogType: DialogType.SUCCES,
+                    animType: AnimType.BOTTOMSLIDE,
+                    title: 'Bienvenido',
+                    desc: 'Tus datos son correctos',
+                    btnOkOnPress: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => TapBarView()),
+                      );
+                    },
+                  )..show();
+                }
+              },
+        child: loginProvider.getLoading
+            ? CircularProgressIndicator()
+            : Text("Iniciar sesión"),
+      ),
     );
   }
 }

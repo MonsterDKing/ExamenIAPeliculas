@@ -17,7 +17,7 @@ class TapBarWidget extends StatelessWidget {
         backgroundColor: Theme.of(context).primaryColor,
         currentIndex: tabBarProvider.getTabIndex,
         onTap: (int index) {
-          tabBarProvider.setTabIndex(index);
+          tabBarProvider.setTabIndex = index;
         },
         items: [
           BottomNavigationBarItem(

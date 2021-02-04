@@ -1,0 +1,10 @@
+{
+    "app":{
+        "name":"Examen de Ia"
+    },
+    "login":{
+        "usuario":"Usuario",
+        "password":"Contraseña"
+    }
+
+}

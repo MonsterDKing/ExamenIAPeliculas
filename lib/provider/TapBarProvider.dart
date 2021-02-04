@@ -22,12 +22,12 @@ class TapBarProvider with ChangeNotifier {
   get getMovieSelected => _movie;
 
   //Setter
-  setTabIndex(int valor) {
+  set setTabIndex(int valor) {
     this._tabIndex = valor;
     notifyListeners();
   }
 
-  setMovie(Movie valor) {
+  set setMovie(Movie valor) {
     this._movie = valor;
     notifyListeners();
   }

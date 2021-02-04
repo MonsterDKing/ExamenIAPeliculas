@@ -31,13 +31,13 @@ class UsuarioProvider with ChangeNotifier {
   }
 
   //Setter
-  setLoading(bool valor) {
-    _loading = valor;
+  set setLoading(bool valor) {
+    this._loading = valor;
     notifyListeners();
   }
 
-  setCardCinepolis(String valor) {
-    _cardCinepolis = valor;
+  set setCardCinepolis(String valor) {
+    this._cardCinepolis = valor;
     notifyListeners();
   }
 
@@ -45,32 +45,38 @@ class UsuarioProvider with ChangeNotifier {
 
   Future<bool> login(LoginModel login) async {
     if (!_loading) {
-      _loading = true;
+      setLoading = true;
       var d = await api.login(login);
       if (d == null) {
-        _loading = false;
+        setLoading = false;
         return false;
       }
-      _loginData = d;
+
+      this._loginData = d;
       saveInLocalStorage(d);
-      _loading = false;
+      setLoading = false;
       return true;
     }
   }
 
   Future<UsuarioResponseModel> getUserData() async {
-    _usermodel = await api
+    this._usermodel = await api
         .getUserData("${_loginData.tokenType} ${_loginData.accessToken}");
     return _usermodel;
   }
 
   Future<CarteleraResponseModel> getBillboard() async {
-    _cartelera = await api
+    this._cartelera = await api
         .getCartelera("${_loginData.tokenType} ${_loginData.accessToken}");
     return _cartelera;
   }
 
-  Future getInformationCard() async {}
+  Future getInformationCard() async {
+    this._dataCardCinepolis = await api.getDataCard(
+        "${_loginData.tokenType} ${_loginData.accessToken}", _cardCinepolis);
+
+    return _cartelera;
+  }
 
   saveInLocalStorage(LoginResponseModel valor) {
     final LocalStorageService localstorage = getIt<LocalStorageService>();
@@ -80,7 +86,7 @@ class UsuarioProvider with ChangeNotifier {
   getDataInLocalStorage() {
     final LocalStorageService localstorage = getIt<LocalStorageService>();
     if (_loginData == null) {
-      _loginData = localstorage.getUserInfo;
+      this._loginData = localstorage.getUserInfo;
     }
   }
 }

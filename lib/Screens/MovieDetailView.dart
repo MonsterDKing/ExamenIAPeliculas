@@ -78,10 +78,10 @@ class _MovieDetailViewState extends State<MovieDetailView> {
                                 color: Colors.white,
                               ),
                               onPressed: () {
-                                FlutterSocialContentShare.share(
-                                    type: ShareType.facebookWithoutImage,
-                                    url: "https://www.apple.com",
-                                    quote: "captions");
+                                // FlutterSocialContentShare.share(
+                                //     type: ShareType.facebookWithoutImage,
+                                //     url: "https://www.apple.com",
+                                //     quote: "captions");
                               }),
                         )
                       ],
