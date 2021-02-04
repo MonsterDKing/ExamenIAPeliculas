@@ -52,5 +52,5 @@ Prueba de flutter para IA
 
 tuve que agregar esto ya que algunas librerias estan deprecadas ( serian las de shared flutter_social_content_share lo intente con diversas y tuve el mismo problema pero con esto se corrige ) .
 
-## Comentarios 
-* No pude conectar con el servicio de la tarjeta  que seria este (  https://stageapi.cinepolis.com/v1/members/loyalty/ ) siempre me retorna un error 404 a un que ya se cuenta con todo el metodo y estructura para realizar esta tarea necesito verificar como consumir de manera correcta el endpoint 
+## Comentarios
+* No pude conectar con el servicio de la tarjeta  que seria este (  https://stageapi.cinepolis.com/v1/members/loyalty/ ) siempre me retorna un error 404 a un que ya se cuenta con todo el metodo y estructura para realizar esta tarea necesito verificar como consumir de manera correcta el endpoint

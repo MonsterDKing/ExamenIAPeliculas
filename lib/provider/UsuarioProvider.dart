@@ -11,6 +11,7 @@ class UsuarioProvider with ChangeNotifier {
   ApiService api = ApiService();
 
   bool _loading = false;
+  bool _loadingCardInformation = false;
   LoginResponseModel _loginData;
   UsuarioResponseModel _usermodel;
   CarteleraResponseModel _cartelera;
@@ -19,6 +20,7 @@ class UsuarioProvider with ChangeNotifier {
 
   //Getter
   bool get getLoading => _loading;
+  bool get getLoadingCardInformation => _loadingCardInformation;
   LoginResponseModel get getLoginData => _loginData;
   UsuarioResponseModel get getUserModel => _usermodel;
   CarteleraResponseModel get getCartelera => _cartelera;
@@ -38,6 +40,11 @@ class UsuarioProvider with ChangeNotifier {
 
   set setCardCinepolis(String valor) {
     this._cardCinepolis = valor;
+    notifyListeners();
+  }
+
+  set setLoadingCardInformation(bool valor) {
+    this._loadingCardInformation = valor;
     notifyListeners();
   }
 
@@ -72,10 +79,12 @@ class UsuarioProvider with ChangeNotifier {
   }
 
   Future getInformationCard() async {
+    setLoadingCardInformation = true;
     this._dataCardCinepolis = await api.getDataCard(
         "${_loginData.tokenType} ${_loginData.accessToken}", _cardCinepolis);
 
-    return _cartelera;
+    setLoadingCardInformation = false;
+    return this._dataCardCinepolis;
   }
 
   saveInLocalStorage(LoginResponseModel valor) {

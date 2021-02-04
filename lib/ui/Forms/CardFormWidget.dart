@@ -54,7 +54,7 @@ class CardFormWidget extends StatelessWidget {
                   print("no valido");
                 }
               },
-              child: Text("Iniciar sesión"),
+              child: Text("Ingresar Tarjeta"),
             )
           ],
         ),

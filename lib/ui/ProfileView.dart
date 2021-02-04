@@ -40,21 +40,50 @@ class ProfileView extends StatelessWidget {
                       Text("${snapshot.data.cardNumber}"),
                       usuarioProvider.getCardCinepolis == null
                           ? CardFormWidget(formKey: _formKey)
-                          : Container(
-                              margin: EdgeInsets.symmetric(vertical: 30),
-                              child: Column(
-                                children: [
-                                  Text(
-                                      "Espere en lo que se solicita la informacion"),
-                                  SizedBox(
-                                    height: 30,
+                          : usuarioProvider.getLoadingCardInformation
+                              ? Container(
+                                  margin: EdgeInsets.symmetric(vertical: 30),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                          "Espere en lo que se solicita la informacion"),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      Container(
+                                          child: Center(
+                                              child:
+                                                  CircularProgressIndicator()))
+                                    ],
                                   ),
-                                  Container(
-                                      child: Center(
-                                          child: CircularProgressIndicator()))
-                                ],
-                              ),
-                            )
+                                )
+                              : usuarioProvider.getDataCardCinepolis == null
+                                  ? Container(
+                                      margin:
+                                          EdgeInsets.symmetric(vertical: 30),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                              "Hubo un error al procesar su solicitud intentelo nuevamente"),
+                                          SizedBox(
+                                            height: 30,
+                                          ),
+                                          Container(
+                                              child: Center(
+                                                  child: OutlineButton(
+                                            onPressed: () {
+                                              usuarioProvider.setCardCinepolis =
+                                                  null;
+                                            },
+                                            child: Text("Reintentar"),
+                                          )))
+                                        ],
+                                      ),
+                                    )
+                                  : Container(
+                                      child: Text(
+                                          usuarioProvider.getDataCardCinepolis),
+                                    )
                     ],
                   ),
                 )
