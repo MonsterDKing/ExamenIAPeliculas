@@ -22,62 +22,10 @@ class DBProvider {
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, 'HallazgoDB.db');
+    String path = join(documentsDirectory.path, 'FlutterCine.db');
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute('CREATE TABLE Consolidada('
-          'id INTEGER PRIMARY KEY,'
-          'EMPRESA TEXT,'
-          'PROCESO TEXT,'
-          'SUBPROCESO TEXT,'
-          'UBICACION TEXT,'
-          'INCIDENTE TEXT,'
-          'PELIGRO TEXT,'
-          'RIESGO TEXT,'
-          'ACTIV_CONT TEXT,'
-          'TIPO_ACTIVIDAD TEXT,'
-          'idUbicacion INTEGER ,'
-          'idEmpresa INTEGER'
-          ')');
-
-      await db.execute('CREATE TABLE ConsolidadaDos('
-          'id INTEGER PRIMARY KEY,'
-          'idgen_empresas INTEGER,'
-          'nombre_empresas TEXT,'
-          'idgen_procesos INTEGER,'
-          'nombre_procesos TEXT,'
-          'idgen_subprocesos INTEGER,'
-          'nombre_subprocesos TEXT,'
-          'idgen_ubicacion INTEGER,'
-          'nombre_ubicacion TEXT,'
-          'idgen_peligroreal INTEGER,'
-          'nombre_peligroreal TEXT ,'
-          'gen_magnitudes_idgen_magnitudes TEXT ,'
-          'detalles_subproceso TEXT '
-          ')');
-
-      await db.execute('CREATE TABLE ControlTable('
-          'id INTEGER PRIMARY KEY,'
-          'idgen_empresas INTEGER,'
-          'gen_subprocesos_gen_procesos_idgen_procesos INTEGER,'
-          'gen_subprocesos_idgen_subprocesos INTEGER,'
-          'nombre_procesos TEXT '
-          ')');
-
-      await db.execute('CREATE TABLE Incidentes('
-          'id INTEGER PRIMARY KEY,'
-          'gen_subprocesos_idgen_subprocesos INTEGER,'
-          'gen_subprocesos_gen_procesos_idgen_procesos INTEGER,'
-          'riesgo TEXT,'
-          'nombre_procesos TEXT '
-          ')');
-
-      await db.execute('CREATE TABLE MapaDeRiesgoTable('
-          'id INTEGER PRIMARY KEY,'
-          'gen_empresas_idgen_empresas INTEGER,'
-          'gen_ubicacion_idgen_ubicacion INTEGER,'
-          'gen_subprocesos_idgen_subprocesos INTEGER,'
-          'Nombre TEXT '
+      await db.execute('CREATE TABLE Movie('
           ')');
     });
   }

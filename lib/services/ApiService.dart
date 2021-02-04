@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 import 'package:examenia/config/AppConfig.dart';
+import 'package:examenia/models/CarteleraResponseModel.dart';
 import 'package:examenia/models/LoginModel.dart';
 import 'package:examenia/models/LoginResponseModel.dart';
+import 'package:examenia/models/UsuarioResponseModel.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  var headers = {"api_key": "stage_HNYh3RaK_Test"};
+  Map<String, String> headers = {"api_key": "stage_HNYh3RaK_Test"};
 
   Future<LoginResponseModel> login(LoginModel login) async {
     try {
@@ -21,6 +23,38 @@ class ApiService {
 
       if (resp.statusCode == 200) {
         final decodedData = loginResponseModelFromJson(resp.body);
+        return decodedData;
+      }
+
+      return null;
+    } catch (ex) {
+      return null;
+    }
+  }
+
+  Future<UsuarioResponseModel> getUserData(String bearer) async {
+    try {
+      final String _url = Appconfig.userUrl;
+      headers["Authorization"] = bearer;
+      final resp = await http.get(_url, headers: headers);
+      if (resp.statusCode == 200) {
+        final decodedData = usuarioResponseModelFromJson(resp.body);
+        return decodedData;
+      }
+
+      return null;
+    } catch (ex) {
+      return null;
+    }
+  }
+
+  Future<CarteleraResponseModel> getCartelera(String bearer) async {
+    try {
+      final String _url = Appconfig.carteleraUrl;
+      headers["Authorization"] = bearer;
+      final resp = await http.get(_url, headers: headers);
+      if (resp.statusCode == 200) {
+        final decodedData = carteleraResponseModelFromJson(resp.body);
         return decodedData;
       }
 

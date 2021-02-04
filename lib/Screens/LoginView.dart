@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:examenia/Screens/TapBarView.dart';
 import 'package:examenia/models/LoginModel.dart';
-import 'package:examenia/provider/LoginProvider.dart';
+import 'package:examenia/provider/UsuarioProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +11,7 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<LoginProvider>(context);
+    final loginProvider = Provider.of<UsuarioProvider>(context);
 
     return Scaffold(
       body: Container(
@@ -79,7 +79,7 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Widget _buttonSend(LoginProvider loginProvider, BuildContext context) {
+  Widget _buttonSend(UsuarioProvider loginProvider, BuildContext context) {
     return OutlineButton(
       borderSide: BorderSide(width: 1, color: Colors.grey),
       color: Colors.grey,

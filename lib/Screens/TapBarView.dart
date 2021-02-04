@@ -1,7 +1,5 @@
 import 'package:examenia/provider/TapBarProvider.dart';
-import 'package:examenia/ui/ComplexView.dart';
-import 'package:examenia/ui/ProfileView.dart';
-import 'package:examenia/ui/BillboardView.dart';
+import 'package:examenia/ui/Widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,16 +9,9 @@ class TapBarView extends StatefulWidget {
 }
 
 class _TapBarViewState extends State<TapBarView> {
-  List<Widget> listScreens;
-
   @override
   void initState() {
     super.initState();
-    listScreens = [
-      ProfileView(),
-      BillboardView(),
-      ComplexView(),
-    ];
   }
 
   @override
@@ -32,25 +23,8 @@ class _TapBarViewState extends State<TapBarView> {
         centerTitle: true,
         title: Text(tabBarProvider.getListTitle[tabBarProvider.getTabIndex]),
       ),
-      body: listScreens[tabBarProvider.getTabIndex],
-      bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey[400],
-          backgroundColor: Theme.of(context).primaryColor,
-          currentIndex: tabBarProvider.getTabIndex,
-          onTap: (int index) {
-            tabBarProvider.setTabIndex(index);
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Container(),
-              label: tabBarProvider.getListTitle[0],
-            ),
-            BottomNavigationBarItem(
-                icon: Container(), label: tabBarProvider.getListTitle[1]),
-            BottomNavigationBarItem(
-                icon: Container(), label: tabBarProvider.getListTitle[2]),
-          ]),
+      body: tabBarProvider.getListScreens[tabBarProvider.getTabIndex],
+      bottomNavigationBar: TapBarWidget(tabBarProvider: tabBarProvider),
       // backgroundColor: Theme.of(context).primaryColor,
     );
   }
