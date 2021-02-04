@@ -34,7 +34,7 @@ Prueba de flutter para IA
 * Models para almacenar los modelos y sus respectivos metodos de TOJSON FROMJSON
 * Provider como carpeta de repositorio para poder compartir la informacion en toda la aplicacion ( manejador de estado)
 * Screens vistas que son independientes totalmente una de otra
-* Services carpeta para manejar los archivos y sus peticiones en caso de ser muchaos endpoints poder identificar por cada modelo y objeto al ser tan pocos opte por juntar todo
+* Services carpeta para manejar los archivos y sus peticiones en caso de ser muchos endpoints poder identificar por cada modelo y objeto al ser tan pocos opte por juntar todo
 * UI en esta carpeta agregue todo los widgets que se pdrian reutilizar en otras vistas o elementos que depende de una vista como tal
 
 ## Como correr el proyecto
@@ -52,5 +52,5 @@ Prueba de flutter para IA
 
 tuve que agregar esto ya que algunas librerias estan deprecadas ( serian las de shared flutter_social_content_share lo intente con diversas y tuve el mismo problema pero con esto se corrige ) .
 
-## Comentarios
-* No pude conectar con el servicio de la tarjeta  que seria este (  https://stageapi.cinepolis.com/v1/members/loyalty/ ) siempre me retorna un error 404 a un que ya se cuenta con todo el metodo y estructura para realizar esta tarea necesito verificar como consumir de manera correcta el endpoint
+## Comentarios 
+* No pude conectar con el servicio de la tarjeta  que seria este (  https://stageapi.cinepolis.com/v1/members/loyalty/ ) siempre me retorna un error 404 a un que ya se cuenta con todo el metodo y estructura para realizar esta tarea necesito verificar como consumir de manera correcta el endpoint 
